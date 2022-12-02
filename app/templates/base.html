@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sample App</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{{url_for('static', filename='style/style.css')}}">
+        
+        <!-- JavaScript Libs -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        
+        <!-- PyScript -->
+        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+        <py-config>
+            autoclose_loader: true
+            {# - runtimes
+              - name: pyodide
+                lang: python
+                src: /static/pyodide/pyodide.js #}
+            [[fetch]]
+            files = ["./static/python/main.py"]
+        </py-config>
+        {% endblock %}
+    </head>
+
+    <body>
+        <div class="section">
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        <py-script src="{{ url_for('static', filename='python/main.py') }}"></py-script>
+    </body>
+
+</html>
